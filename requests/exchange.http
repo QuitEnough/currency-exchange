@@ -1,0 +1,24 @@
+### Exchange - 200 Ok
+### Using direct exchange rate
+GET http://localhost:8080/currency_exchange_war_exploded/exchange?from=USD&to=EUR&amount=100
+Accept: application/json
+
+### Exchange - 200 Ok
+### Using indirect exchange rate
+GET http://localhost:8080/currency_exchange_war_exploded/exchange?from=GBP&to=USD&amount=100
+Accept: application/json
+
+### Exchange - 200 Ok
+### Using cross exchange rate
+GET http://localhost:8080/currency_exchange_war_exploded/exchange?from=JPY&to=CNY&amount=100
+Accept: application/json
+
+### Exchange - 404 Not Found
+### Exchange rate for currencies is not present in the database
+GET http://localhost:8080/currency_exchange_war_exploded/exchange?from=USD&to=PLN&amount=100
+Accept: application/json
+
+### Exchange - 400 Bad Parameter
+### Invalid or missing parameters
+GET http://localhost:8080/currency_exchange_war_exploded/exchange?from=123&to=EUR&amount=100
+Accept: application/json

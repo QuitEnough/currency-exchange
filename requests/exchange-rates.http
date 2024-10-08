@@ -1,0 +1,79 @@
+### Get all exchange rates - 200 Ok
+GET http://localhost:8080/currency_exchange_war_exploded/exchangeRates
+Accept: application/json
+
+### Add new exchange rate - 201 Created
+POST http://localhost:8080/currency_exchange_war_exploded/exchangeRates
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+baseCurrencyCode=GBP &
+targetCurrencyCode=EUR &
+rate=1.17
+
+### Add new exchange rate - 400 Bad Request
+### Invalid or missing parameters
+POST http://localhost:8080/currency_exchange_war_exploded/exchangeRates
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+baseCurrencyCode=123 &
+targetCurrencyCode=EUR &
+rate=qwe
+
+### Add new exchange rate - 409 Conflict
+### Exchange rate already exist in the database
+POST http://localhost:8080/currency_exchange_war_exploded/exchangeRates
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+baseCurrencyCode=USD &
+targetCurrencyCode=EUR &
+rate=1.17
+
+### Add new exchange rate - 404 Not Found
+### Currency for which exchange rate is added is not present in the database
+POST http://localhost:8080/currency_exchange_war_exploded/exchangeRates
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+baseCurrencyCode=PLN &
+targetCurrencyCode=EUR &
+rate=1.17
+
+### Get exchange rate - 200 Ok
+GET http://localhost:8080/currency_exchange_war_exploded/exchangeRate/USDEUR
+Accept: application/json
+
+### Get exchange rate - 400 Bad Request
+### Invalid or missing currency codes in the path
+GET http://localhost:8080/currency_exchange_war_exploded/exchangeRate/U23EUR
+Accept: application/json
+
+### Get exchange rate - 404 Not Found
+### Exchange rate for currencies is not present in the database
+GET http://localhost:8080/currency_exchange_war_exploded/exchangeRate/PLNEUR
+Accept: application/json
+
+### Patch exchange rate - 200 Ok
+PATCH http://localhost:8080/currency_exchange_war_exploded/exchangeRate/USDEUR
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+rate=1.3
+
+### Patch exchange rate - 400 Bad Request
+### Invalid or missing rate parameter
+PATCH http://localhost:8080/currency_exchange_war_exploded/exchangeRate/USDEUR
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+rate=qwe
+
+### Patch exchange rate - 404 Not Found
+### Exchange rate for currencies is not present in the database
+PATCH http://localhost:8080/currency_exchange_war_exploded/exchangeRate/PLNEUR
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+rate=1.32

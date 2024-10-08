@@ -1,0 +1,53 @@
+### Get currency by code - 200 Ok
+GET http://localhost:8080/currency_exchange_war_exploded/currency/USD
+Accept: application/json
+
+### Get currency by code - 400 Bad Request
+### Invalid currecny code format
+GET http://localhost:8080/currency_exchange_war_exploded/currency/eur
+Accept: application/json
+
+### Get currency by code - 400 Bad Request
+### Invalid currecny code format
+GET http://localhost:8080/currency_exchange_war_exploded/currency/
+Accept: application/json
+
+### Get currency by code - 404 Not Found
+### Requested currency not found in the database
+GET http://localhost:8080/currency_exchange_war_exploded/currency/RKL
+Accept: application/json
+
+#################################
+
+### Get all currencies - 200 Ok
+GET http://localhost:8080/currency_exchange_war_exploded/currencies
+Accept: application/json
+
+### Add new currency - 201 Created
+POST http://localhost:8080/currency_exchange_war_exploded/currencies
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+name=Georgian Lari &
+code=GEL &
+sign=₾
+
+### Add new currency - 400 Bad Request
+### Invalid or missing parameters
+POST http://localhost:8080/currency_exchange_war_exploded/currencies
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+name=Georgian Lari &
+code= &
+sign=₾
+
+### Add new currency - 409 Conflict
+### Currency already exist in the database
+POST http://localhost:8080/currency_exchange_war_exploded/currencies
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+name=US Dollar &
+code=USD &
+sign=$
